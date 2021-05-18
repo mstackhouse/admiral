@@ -55,7 +55,17 @@ initialize <- function(dataset_name, metadata, source_datasets) {
     warn(msg)
   }
 
-  source_datasets %>%
+  dataset <- source_datasets %>%
     reduce(full_join, by = c("STUDYID", "USUBJID"), suffix = c("", "_")) %>%
     select(!!!syms(existing_predecessors))
+
+  structure(
+    list(
+      dataset = dataset,
+      source_datasets = source_datasets,
+      metadata = metadata[[dataset_name]]
+    ),
+    class = "adam",
+    name = dataset_name
+  )
 }
