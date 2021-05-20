@@ -15,12 +15,19 @@ new_derivation <- function(fun) {
 
     obj$dataset <- do.call(fun, args)
 
-    new_vars <- setdiff(colnames(dataset), existing_vars)
+    # Add labels
+    new_vars <- setdiff(colnames(obj$dataset), existing_vars)
     for (var in new_vars) {
-      attr(dataset[[var]], "label") <- metadata %>%
+      attr(obj$dataset[[var]], "label") <- metadata %>%
         filter(Variable == var) %>%
         pull(Label)
     }
+
+    # Drop temporary variables
+    # tmp_vars <- colnames(obj$dataset) %!in% obj$metadata$Variable
+    # for (var in tmp_vars) {
+    #   obj$dataset[[var]] <- NULL
+    # }
 
     obj
   }

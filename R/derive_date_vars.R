@@ -543,12 +543,12 @@ derive_vars_dt <- function(dataset,
 #'   date_imputation = "FIRST",
 #'   time_imputation = "FIRST"
 #' )
-derive_vars_dtm <- function(dataset,
-                            new_vars_prefix,
-                            dtc,
-                            date_imputation = NULL, # "02-01" or "LAST"
-                            time_imputation = "00:00:00", # or 'FIRST' 'LAST'
-                            flag_imputation = TRUE) {
+derive_vars_dtm <- new_derivation(function(obj,
+                                           new_vars_prefix,
+                                           dtc,
+                                           date_imputation = NULL, # "02-01" or "LAST"
+                                           time_imputation = "00:00:00", # or 'FIRST' 'LAST'
+                                           flag_imputation = TRUE) {
 
   # Check DTC is present in input dataset
   assert_has_variables(dataset, deparse(substitute(dtc)))
@@ -566,8 +566,8 @@ derive_vars_dtm <- function(dataset,
         time_imputation = time_imputation
       ),
       !!sym(dtm) := convert_dtc_to_dtm(dtc = idtc__)
-    ) %>%
-    select(-ends_with("__"))
+    ) # %>%
+    # select(-ends_with("__"))
 
   if (flag_imputation) {
     dtf <- paste0(new_vars_prefix, "DTF")
@@ -592,4 +592,4 @@ derive_vars_dtm <- function(dataset,
   }
 
   dataset
-}
+})
