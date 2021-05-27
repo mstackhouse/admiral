@@ -523,6 +523,7 @@ derive_vars_dt <- function(dataset,
 #' @keywords derivation timing
 #'
 #' @export
+#' @name derive_vars_dtm
 #'
 #' @examples
 #' mhdt <- tibble::tribble(
@@ -543,7 +544,7 @@ derive_vars_dt <- function(dataset,
 #'   date_imputation = "FIRST",
 #'   time_imputation = "FIRST"
 #' )
-derive_vars_dtm <- new_derivation(function(obj,
+new_derivation("derive_vars_dtm", function(obj,
                                            new_vars_prefix,
                                            dtc,
                                            date_imputation = NULL, # "02-01" or "LAST"
