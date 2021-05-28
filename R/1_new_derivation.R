@@ -36,10 +36,8 @@ new_derivation <- function(fun) {
     }
 
     # Drop temporary variables
-    # tmp_vars <- colnames(obj$dataset) %!in% obj$metadata$Variable
-    # for (var in tmp_vars) {
-    #   obj$dataset[[var]] <- NULL
-    # }
+    tmp_vars <- setdiff(colnames(obj$dataset), obj$metadata$Variable)
+    obj$dataset[, tmp_vars] <- NULL
 
     obj
   }
