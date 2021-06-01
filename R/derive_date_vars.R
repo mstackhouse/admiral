@@ -549,7 +549,7 @@ derive_vars_dtm <- new_derivation(function(obj,
                                            date_imputation = NULL, # "02-01" or "LAST"
                                            time_imputation = "00:00:00", # or 'FIRST' 'LAST'
                                            flag_imputation = TRUE) {
-
+  dataset <- get_dataset(obj)
   # Check DTC is present in input dataset
   assert_has_variables(dataset, deparse(substitute(dtc)))
 

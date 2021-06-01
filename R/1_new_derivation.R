@@ -6,8 +6,14 @@ new_derivation <- function(fun) {
     abort("First argument of `fun` must be named `obj`.")
   }
 
-  if ("obj" %in% all.vars(body(fun))) {
-    abort("Derivations are nor allowed to reference the `obj` variable in their function body.")
+  overwrites_obj <- function(expr) {
+    is.call(expr) &&
+      expr[[1L]] == quote(`<-`) &&
+      grepl("^obj[$|\\[]?", deparse(expr[[2L]]))
+  }
+
+  if (any(map_lgl(as.list(body(fun)), overwrites_obj))) {
+    abort("Derivations are nor allowed to overwrite the `obj` variable in their function body.")
   }
 
   derivation_fun <- function(...) {
@@ -21,8 +27,6 @@ new_derivation <- function(fun) {
       environment(.(as.symbol(fun_impl_name))) <- .obj_env
     }))
 
-    list2env(obj, envir = .obj_env)
-    on.exit(rm(list = ls(.obj_env), envir = .obj_env))
     existing_vars <- colnames(obj$dataset)
 
     obj$dataset <- do.call(fun_impl_name, args)
@@ -46,4 +50,23 @@ new_derivation <- function(fun) {
   class(derivation_fun) <- c("admiral_function", "function")
 
   derivation_fun
+}
+
+is_adam <- function(x) {
+  inherits(x, "adam")
+}
+
+get_dataset <- function(obj) {
+  assert_that(is_adam(obj))
+  obj$dataset
+}
+
+get_source_dataset <- function(obj, name) {
+  assert_that(is_adam(obj))
+  obj$source_datasets[[name]]
+}
+
+get_metadata <- function(obj) {
+  assert_that(is_adam(obj))
+  obj$metadata
 }
