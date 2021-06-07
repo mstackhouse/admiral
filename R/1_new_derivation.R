@@ -39,7 +39,9 @@ new_derivation <- function(fun) {
 
     # Drop temporary variables
     tmp_vars <- setdiff(colnames(obj$dataset), obj$metadata$Variable)
-    obj$dataset[, tmp_vars] <- NULL
+    if (length(tmp_vars) >= 1L) {
+      obj$dataset[, tmp_vars] <- NULL
+    }
 
     obj
   }
