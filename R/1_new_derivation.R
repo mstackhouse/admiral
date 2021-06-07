@@ -20,12 +20,10 @@ new_derivation <- function(fun) {
     call <- match.call()
     fun_name <- call[[1L]]
     args <- as.list(call[-1L])
+    args$obj <- force(obj)
 
     fun_impl_name <- paste0(fun_name, "_impl")
     assign(fun_impl_name, fun)
-    eval(bquote({
-      environment(.(as.symbol(fun_impl_name))) <- .obj_env
-    }))
 
     existing_vars <- colnames(obj$dataset)
 
