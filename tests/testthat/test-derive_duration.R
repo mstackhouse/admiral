@@ -1,3 +1,6 @@
+context("test-derive_vars_duration")
+
+
 test_that("duration and unit variable are added", {
   input <- tibble::tribble(
     ~BRTHDT, ~RANDDT,

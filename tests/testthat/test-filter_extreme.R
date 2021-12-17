@@ -1,3 +1,6 @@
+context("test-filter_extreme")
+
+
 test_that("first observation for each group are selected", {
   input <- tibble::tribble(
     ~USUBJID, ~AVISITN, ~AVAL,

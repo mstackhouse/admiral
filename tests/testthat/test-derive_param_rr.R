@@ -1,3 +1,6 @@
+context("test-derive_param_qtcb")
+
+
 test_that("new observations are derived correctly", {
   input <- tibble::tribble(
     ~USUBJID,      ~PARAMCD, ~PARAM,        ~AVAL, ~AVALU,      ~VISIT,

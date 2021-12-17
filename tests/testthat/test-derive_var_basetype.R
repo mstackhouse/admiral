@@ -1,3 +1,5 @@
+context("test-derive_var_basetype")
+
 test_that("records are duplicated across different `BASETYPE` values", {
   input <- tibble::tribble(
     ~USUBJID, ~EPOCH,         ~PARAMCD,  ~ASEQ, ~AVAL,

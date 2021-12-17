@@ -1,3 +1,5 @@
+context("test-convert_dtc_to_dt")
+
 inputdtc <- c(
   "2019-07-18T15:25:52",
   "2019-07-18"

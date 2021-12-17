@@ -1,3 +1,5 @@
+context("test-derive_vars_suppqual")
+
 test_that("IDVAR is missing, join by USUBJID", {
   input <- tibble::tribble(
     ~USUBJID, ~DOMAIN,

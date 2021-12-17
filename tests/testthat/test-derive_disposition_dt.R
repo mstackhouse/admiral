@@ -1,3 +1,5 @@
+context("test-derive_disposition_dt")
+
 adsl <- tibble::tribble(
   ~STUDYID, ~USUBJID,
   "TEST01", "PAT01",

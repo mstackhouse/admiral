@@ -1,3 +1,5 @@
+context("test-derive_disposition_status")
+
 dm <- tibble::tribble(
   ~STUDYID, ~USUBJID,
   "TEST01", "PAT01",

@@ -1,3 +1,6 @@
+context("test-derive_var_trtdurd")
+
+
 test_that("TRTDURD is added", {
   input <- tibble::tribble(
     ~TRTSDT, ~TRTEDT,

@@ -1,3 +1,6 @@
+context("test-derive_param_tte")
+
+
 test_that("new observations with analysis date are derived correctly", {
   adsl <- tibble::tribble(
     ~USUBJID, ~DTHFL, ~DTHDT,            ~LSTALVDT,         ~TRTSDT,           ~TRTSDTF,
